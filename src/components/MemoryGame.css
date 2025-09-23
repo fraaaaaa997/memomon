@@ -1,0 +1,113 @@
+.memory-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh !important;
+    width: 100vw; /* prende tutta la larghezza */
+    margin: 0;
+    background: url("../assets/sfondomemory.jpg") no-repeat center center;
+    background-size: cover;
+  }
+  
+  
+  .title {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  }
+  
+  /* griglia memory */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr); /* 8 colonne flessibili */
+    gap: 12px;
+    justify-content: center;
+    margin-top: 2vh;
+    max-width: 90vw; /* così non sborda mai */
+  }
+  
+  /* carta */
+  .card {
+    aspect-ratio: 1 / 1; /* mantiene la forma quadrata dinamica */
+    width: 100px;
+    max-width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    perspective: 1000px;
+    position: relative;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.2);
+  }
+  
+  /* immagini Pokémon: prendono tutta la carta ma rispettano le proporzioni */
+  .card img {
+    width: 100%;
+    height: 100%;
+    background: url("../assets/fronte.jpeg") no-repeat center center;
+    object-fit: contain; /* non taglia l'immagine */
+    background: white;   /* per riempire gli spazi vuoti */
+    border-radius: 10px;
+  }
+  
+  /* retro carta */
+  .back {
+    width: 100%;
+    height: 100%;
+    background: url("../assets/carta.jpeg") no-repeat center center;
+    background-size: contain; /* mostra l’intera immagine */
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0);  /* riempimento per i bordi */
+  }
+  
+  .victory {
+    margin-top: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 2px 2px 6px black;
+  }
+  
+  .scoreboard {
+    display: flex;
+    gap: 60px;               /* spazio tra i due box */
+    justify-content: center;  /* centra la scoreboard */
+    margin-bottom: 20px;
+  }
+  
+  .scoreboard p {
+    background: rgba(226, 226, 226, 0.5); /* sfondo semi-trasparente */
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 1rem;
+  }
+  
+  /* colore diverso per Player 1 e Player 2 */
+  .scoreboard p.player1 {
+    background-color: rgba(0, 0, 0, 0.338); /* blu */
+  }
+  
+  .scoreboard p.player2 {
+    background-color: rgba(0, 0, 0, 0.338); /* rosso */
+  }
+  
+  
+/*   .turno {
+    color: black;
+    background: rgba(226, 226, 226, 0.5); 
+    padding: 0px 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+  } */
