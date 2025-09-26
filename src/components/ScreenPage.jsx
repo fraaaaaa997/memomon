@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import "./ScreenPage.css";
+
 import gioca from "../assets/gioca.png";
 import charizard from "../assets/charizard.gif";
 import rayquaza from "../assets/rayquaza.gif";
 import gyarados from "../assets/gyarados.gif";
+
+/* nuove immagini per il modal: assicurati che esistano in src/assets */
+import sceltamodalita from "../assets/sceltamodalita.png";
+import singolo from "../assets/singolo.jpeg";
+import doppio from "../assets/doppio.jpeg";
 
 const ScreenPage = ({ setCategory, setStart, setMode }) => {
   const [selected, setSelected] = useState(null);
@@ -16,7 +22,7 @@ const ScreenPage = ({ setCategory, setStart, setMode }) => {
 
   const handlePlayClick = () => {
     if (selected) {
-      setShowModePopup(true); // mostra popup invece di partire subito
+      setShowModePopup(true);
     }
   };
 
@@ -29,6 +35,7 @@ const ScreenPage = ({ setCategory, setStart, setMode }) => {
   return (
     <div className="screen-container">
       <h2 className="title"></h2>
+
       <div className="gif-row">
         <img
           src={charizard}
@@ -49,6 +56,7 @@ const ScreenPage = ({ setCategory, setStart, setMode }) => {
           onClick={() => handleSelect("common")}
         />
       </div>
+
       <div className="button-container">
         <img
           src={gioca}
@@ -60,12 +68,35 @@ const ScreenPage = ({ setCategory, setStart, setMode }) => {
 
       {/* Modal per scegliere la modalità */}
       {showModePopup && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h3>Scegli la modalità di gioco</h3>
+        <div
+          className="modal-overlay"
+          onClick={() => setShowModePopup(false)} /* click esterno chiude */
+        >
+          <div
+            className="modal"
+            onClick={(e) => e.stopPropagation()} /* impedisce la chiusura quando clicchi dentro */
+            role="dialog"
+            aria-modal="true"
+          >
+            <img
+              src={sceltamodalita}
+              alt="Seleziona modalità"
+              className="modal-background"
+            />
+
             <div className="modal-buttons">
-              <button onClick={() => chooseMode("single")}>Giocatore Singolo</button>
-              <button onClick={() => chooseMode("versus")}>1 vs 1</button>
+              <img
+                src={singolo}
+                alt="Giocatore singolo"
+                className="mode-button"
+                onClick={() => chooseMode("single")}
+              />
+              <img
+                src={doppio}
+                alt="1 vs 1"
+                className="mode-button"
+                onClick={() => chooseMode("versus")}
+              />
             </div>
           </div>
         </div>

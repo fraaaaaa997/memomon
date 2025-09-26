@@ -1,118 +1,140 @@
+/* layout principale */
 .screen-container {
-    width: 100vw;
-    height: 100vh;
-    background-image: url('../assets/screen.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* centrato verticalmente */
-    align-items: center;
-    padding:0;
-  }
-  
-  .gif-row {
-    margin-top: 50vh;
-    display: flex;
-    gap: 60px; /* meno spazio tra le gif */
-    justify-content: center;
-    align-items: center;
-    margin-bottom:3vh; /* distanza tra gif e pulsante */
-  }
-  
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../assets/screen.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  padding: 0;
+}
 
+/* GIF row (se vuoi mantenere la posizione precedente, regola margin-top) */
+.gif-row {
+  margin-top: 55vh; 
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3vh;
+}
 
-  .gif {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    border-radius: 12px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .gif.selected {
-    transform: scale(1.1);
-    background-image: url("../assets/aura.gif");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover; /* oppure contain se vuoi intera immagine */
-    background-size: 160% 150%; /* più grande della GIF */
+.gif {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+}
 
-    z-index: 0;
-  }
-  .gif:hover {
-    transform: scale(1.3);
-  }
+.gif.selected {
+  transform: scale(1.1);
+  background-image: url("../assets/aura.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 160% 150%;
+  z-index: 0;
+}
 
-  .gioca-button:hover {
-    transform: scale(1.01);
-    opacity: 0.9;
-  }
-  
-  
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .gioca-button {
-    width: 130px;
-    height: auto;
-    cursor: pointer;
-  }
+.gif:hover {
+  transform: scale(1.3);
+}
 
-  .modal-overlay {
-    position: fixed;
-    top: -5vh;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+/* Gioca button */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    justify-content: center;
-    z-index: 999;
-  }
-  
-  .modal {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    max-width: 400px;
-  }
-  
-  .modal h3 {
-    margin-bottom: 20px;
-  }
-  
-  .modal-buttons {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-  }
-  
-  .modal-buttons button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    background: #ffcb05;
-    color: #2a75bb;
-    font-weight: bold;
-    transition: transform 0.2s;
-  }
-  
-  .modal-buttons button:hover {
-    transform: scale(1.1);
-  }
-  
+.gioca-button {
+  margin: 5vh;
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+
+.gioca-button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Contenitore modal (posizionato al centro) */
+.modal {
+  position: relative;
+  width: min(900px, 45vw);
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  background: transparent;
+}
+
+/* Immagine di sfondo del modal */
+.modal-background {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  pointer-events: none; /* così i click cadono sulla .modal o sui bottoni */
+  user-select: none;
+  z-index: 1;
+}
+
+/* Contenitore dei bottoni posizionati sopra la metà destra dell'immagine */
+.modal-buttons {
+  position: absolute;
+  right: 8%;            /* sulla destra */
+  top: 50%;
+  transform: translateY(-50%); /* centrati verticalmente */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 2;           /* sopra la background */
+  align-items: center;
+}
+
+/* immagini-bottone */
+.mode-button {
+  width: 15vw; /* regola come preferisci */
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.16s ease, opacity 0.16s ease;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+}
+
+.mode-button:hover {
+  transform: scale(1.06);
+  opacity: 0.95;
+}
+
+/* piccoli aggiustamenti responsive */
+@media (max-width: 600px) {
+  .gif { width: 90px; height: 90px; }
+  .gioca-button { width: 110px; }
+  .modal { width: 92vw; }
+  .mode-button { width: 110px; }
+  .modal-buttons { right: 6%; }
+}

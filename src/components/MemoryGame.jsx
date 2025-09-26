@@ -3,7 +3,7 @@ import "./MemoryGame.css";
 
 const MemoryGame = ({ category, mode }) => {
   const [cards, setCards] = useState([]);
-  const [flipped, setFlipped] = useState([]);
+  const [flipped, setFlipped] = useState([])
   const [matched, setMatched] = useState([]);
 
   // solo per modalità 1vs1
@@ -98,10 +98,7 @@ const MemoryGame = ({ category, mode }) => {
     <div className="memory-container">
       <h2 className="title">{category}</h2>
 
-     {/*  <div className="turno">
-      <p>È il turno di <br />Giocatore {turn}</p>
-
-      </div> */}
+     
 
       {mode === "versus" && (
         
@@ -110,6 +107,11 @@ const MemoryGame = ({ category, mode }) => {
           <div className="scoreboard">
             
   <p className="player1">Giocatore 1: <br />{scores.p1}</p>
+
+  <div className="turno">
+      <p>È il turno di <br />Giocatore {turn}</p>
+
+      </div>
   <p className="player2">Giocatore 2: <br />{scores.p2}</p>
 </div>
          
